@@ -83,7 +83,7 @@
         <a href="#sidr-main" id="navigation-toggle"><span class="fa fa-bars"></span>Menu</a>
         <nav id="site-navigation" class="navigation main-navigation clr" role="navigation">
           <div id="main-menu" class="menu-main-container">
-            <?php 
+            <?php
               $main_menu_tree = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
               print drupal_render($main_menu_tree);
             ?>
@@ -95,57 +95,41 @@
 
   <?php if ($is_front): ?>
   <?php if (theme_get_setting('slideshow_display','venture_theme')): ?>
-  <?php 
+  <?php
     $slide1_head = check_plain(theme_get_setting('slide1_head','venture_theme'));   $slide1_desc = check_plain(theme_get_setting('slide1_desc','venture_theme')); $slide1_url = check_plain(theme_get_setting('slide1_url','venture_theme'));
     $slide2_head = check_plain(theme_get_setting('slide2_head','venture_theme'));   $slide2_desc = check_plain(theme_get_setting('slide2_desc','venture_theme')); $slide2_url = check_plain(theme_get_setting('slide2_url','venture_theme'));
     $slide3_head = check_plain(theme_get_setting('slide3_head','venture_theme'));   $slide3_desc = check_plain(theme_get_setting('slide3_desc','venture_theme')); $slide3_url = check_plain(theme_get_setting('slide3_url','venture_theme'));
   ?>
+  <?php $slider_data = slider_data();
+  ?>
   <div id="homepage-slider-wrap" class="clr flexslider-container">
     <div id="homepage-slider" class="flexslider">
       <ul class="slides clr">
+      <?php if(!empty($slider_data)): ?>
+      <?php foreach($slider_data as $key => $value) {
+        $node = node_load($key);
+        $slide1_desc = $node->body['und'][0]['value'];
+        $image_path = $node->field_slider_image['und'][0]['uri'];
+        $slide1_url = 'node/' . $node->nid;
+        $image = theme('image_style', array('style_name' => 'slider', 'path' => $image_path));
+        ?>
         <li class="homepage-slider-slide">
           <a href="<?php print url($slide1_url); ?>">
             <div class="homepage-slide-inner container">
               <?php if($slide1_head || $slide1_desc) : ?>
               <div class="homepage-slide-content">
-                <div class="homepage-slide-title"><?php print $slide1_head; ?></div>
+                <div class="homepage-slide-title"><?php print $value; ?></div>
                 <div class="clr"></div>
                 <div class="homepage-slide-caption"><?php print $slide1_desc; ?></div>
               </div>
               <?php endif; ?>
             </div>
-            <img src="<?php print base_path() . drupal_get_path('theme', 'venture_theme') . '/images/slide-image-1.jpg'; ?>">
+            <?php print $image; ?>
           </a>
         </li>
-        <li class="homepage-slider-slide">
-          <a href="<?php print url($slide2_url); ?>">
-            <div class="homepage-slide-inner container">
-              <?php if($slide2_head || $slide2_desc) : ?>
-              <div class="homepage-slide-content">
-                <div class="homepage-slide-title"><?php print $slide2_head; ?></div>
-                <div class="clr"></div>
-                <div class="homepage-slide-caption"><?php print $slide2_desc; ?></div>
-              </div>
-              <?php endif; ?>
-            </div>
-            <img src="<?php print base_path() . drupal_get_path('theme', 'venture_theme') . '/images/slide-image-2.jpg'; ?>">
-          </a>
-        </li>
-        <li class="homepage-slider-slide">
-          <a href="<?php print url($slide3_url); ?>">
-            <div class="homepage-slide-inner container">
-              <?php if($slide3_head || $slide3_desc) : ?>
-              <div class="homepage-slide-content">
-                <div class="homepage-slide-title"><?php print $slide3_head; ?></div>
-                <div class="clr"></div>
-                <div class="homepage-slide-caption"><?php print $slide3_desc; ?></div>
-              </div>
-              <?php endif; ?>
-            </div>
-            <img src="<?php print base_path() . drupal_get_path('theme', 'venture_theme') . '/images/slide-image-3.jpg'; ?>">
-          </a>
-        </li>
-      </ul>
+      <?php  } ?>
+      <?php endif; ?>
+       </ul>
     </div>
   </div>
   <?php endif; ?>
@@ -199,7 +183,7 @@
       <?php if ($page['sidebar_first']): ?>
         <aside id="secondary" class="sidebar-container" role="complementary">
          <?php print render($page['sidebar_first']); ?>
-        </aside> 
+        </aside>
       <?php endif; ?>
     </div>
   </div>
@@ -220,7 +204,7 @@
           </div><?php endif; ?>
         </div>
       <?php endif; ?>
-      
+
       <?php if ($page['footer']): ?>
         <div class="span_1_of_1 col col-1">
           <?php print render($page['footer']); ?>

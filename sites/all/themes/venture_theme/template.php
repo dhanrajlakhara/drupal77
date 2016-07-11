@@ -106,3 +106,24 @@ function venture_theme_page_alter($page) {
   );
   drupal_add_html_head($viewport, 'viewport');
 }
+
+function slider_data() {
+ global $user;
+  $query = db_select('node', 'node');
+  $query->fields('node', array('nid', 'title'));
+  $query->condition('node.type', array('slider'));
+  $query->condition('node.status', 1,"=");
+  $query->orderBy('created', 'DESC');
+    $result = $query->execute();
+    while($record = $result->fetchAssoc()) {
+      $nids[$record['nid']] = $record['title'];
+    }
+
+    if(!empty($nids)) {
+      return $nids;
+    }
+    else {
+      return FALSE;
+    }
+  return FALSE;
+}
