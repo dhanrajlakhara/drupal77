@@ -17,7 +17,7 @@
 	#sidr-main ul li ul li li li a { padding-left: 30px; }
 	#sidr-main ul li ul li a:before { content: '\f0da'; display: inline-block; -webkit-font-smoothing: antialiased; font-family: 'FontAwesome'; color: #888; margin-right: 10px; }
 	.sidr-class-toggle-sidr-close:before { position: absolute; top:30px; left: 30px; content: '\f00d'; font-family: 'FontAwesome'; color: #fff; margin: 0; }
-	
+
 /* Smaller Then Desktop
 ================================================== */
 @media only screen and (max-width: 959px) {
@@ -34,12 +34,18 @@
 /* Mobile (Portrait & Landscape)
 ================================================== */
 @media only screen and (max-width: 767px) {
+
 	.container { max-width: 480px; width: 90%; }
 	.sidebar-container,
 	.left-content { width: 100%; }
 	.sidebar-container {margin-top: 40px; padding-top: 40px; border-top: 10px solid #eee; }
 	.col{ width: 100%; margin-left: 0; margin-bottom: 25px; }
 	.homepage-slide-content { display: none; }
+	 .news_sections .inner .home_news .left_sec .box {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
 }
 /* Mobile (Landscape)
 ================================================== */

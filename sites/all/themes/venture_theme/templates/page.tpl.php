@@ -180,6 +180,22 @@
         </div>
       </section>
 
+ <!-- news -->
+  <?php $bottom  = render($page['bottom_top']);?>
+  <?php if ($bottom): ?>
+    <section class="news_sections">
+      <section class="inner">
+        <section class="home_news">
+          <section class="block-title">News</section>
+            <aside class="left_sec">
+              <?php print render($page['bottom_top']); ?>
+            </aside>
+        </section>
+      </section>
+    </section>
+  <?php endif; ?>
+  <!-- Latest news -->
+
       <?php if ($page['sidebar_first']): ?>
         <aside id="secondary" class="sidebar-container" role="complementary">
          <?php print render($page['sidebar_first']); ?>
